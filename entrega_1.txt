@@ -1,0 +1,7 @@
+Impresion inicial del problema: Me parece un problema sencillo donde hay que buscar la mejor solucion posible con los conocimientos que poseo actualmente
+
+Ideas de resolucion: Voy a intentar de ordenar las prendas por tiempo de lavado, una vez logrado esto voy a tratar de hacer los lavados con dos prendas siempre que sea entre prendas que tengan tiempos parecidos.
+
+Comentarios del codigo: Fui realizando diccionarios para ver las incompatibilidades de las prendas y para ver los tiempos de cada una. Luego cree funciones auxiliares para poder ordenar las prendas por tiempos y para poder ver si son compatibles entre si. Finalmente cree un diccionario con los resultados y lo escribi en el .txt solicitado.
+
+Comentario final: Creo que mi resultado de 72 no es el ideal y considero que si hacia este trabajo practico justo despues de haber realizado la materia de algoritmos y programacion 2 me podria acordar mejor sobre estructuras como los grafos y heaps que son mas utiles para este tipo de ejercicio de ordenamiento.
