@@ -1,3 +1,5 @@
+import os
+
 def ordenar_lista(minutos_lavado, dic_tiempos):
     result = []
     for i in minutos:
@@ -59,6 +61,12 @@ with open("/Users/tomas/OneDrive/Documentos/FIUBA/Modelos/enunciado_modelos_tp1.
                 break
         indice += 1
     
-    print(resultado)
-    print(prendas_ordenadas_por_tiempo)        
-    print(incompatibles)
+    for prenda in range(1, cantidad_prendas+1):
+        if str(prenda) not in resultado:
+            resultado[prenda] = numero_lavado
+            numero_lavado += 1
+    
+    file = open("/Users/tomas/OneDrive/Documentos/FIUBA/Modelos/resultado.txt", "w")
+    for prenda in resultado.keys():
+        file.write(str(prenda) + " " + str(resultado[prenda]) + "\n")
+    file.close()
