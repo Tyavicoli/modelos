@@ -6,11 +6,13 @@ def ordenar_lista(minutos_lavado, dic_tiempos):
         result += dic_tiempos[i]
     return result
 
-def son_incompatibles(dic_incomp, a, b):
-    if b in dic_incomp and a not in dic_incomp[b]:
-        return False
-    return True
-
+def son_incompatibles(dic_incomp, lista_a, b):
+    for prenda in lista_a:
+        if (str(b) in dic_incomp and str(prenda) not in dic_incomp[str(b)]) and (str(prenda) in dic_incomp and str(b) not in dic_incomp[str(prenda)]):
+            continue
+        else:
+            return True
+    return False
 
 
 
@@ -22,6 +24,7 @@ numero_lavado = 1
 cantidad_prendas = 0
 prendas_ordenadas_por_tiempo = []
 indice = 0
+lista_lavado = []
 
 with open("/Users/tomas/OneDrive/Documentos/FIUBA/Modelos/enunciado_modelos_tp2.txt","r") as archivo:
     for linea in archivo:
@@ -41,21 +44,29 @@ with open("/Users/tomas/OneDrive/Documentos/FIUBA/Modelos/enunciado_modelos_tp2.
                 tiempos[int(aux[2])] = [aux[1]]
             else:
                 tiempos[int(aux[2])].append(aux[1])
-    #for n in tiempos.keys():
-        #for i in range(1, cantidad_prendas+1):
+    
     minutos.sort(reverse=True)
     prendas_ordenadas_por_tiempo = ordenar_lista(minutos, tiempos)
     
     while indice < cantidad_prendas:
         if prendas_ordenadas_por_tiempo[indice] in resultado:
-            indice +=1
+            indice += 1
             continue
-        for i in range(indice + 1, cantidad_prendas):
+        for i in range(indice, cantidad_prendas):
             if prendas_ordenadas_por_tiempo[i] in resultado:
                 continue
-            if not son_incompatibles(incompatibles, prendas_ordenadas_por_tiempo[indice], prendas_ordenadas_por_tiempo[i]):
+            if not son_incompatibles(incompatibles, [prendas_ordenadas_por_tiempo[indice]], prendas_ordenadas_por_tiempo[i]):
+                lista_lavado.append(prendas_ordenadas_por_tiempo[indice])
+                lista_lavado.append(prendas_ordenadas_por_tiempo[i])
                 resultado[prendas_ordenadas_por_tiempo[indice]] = numero_lavado
                 resultado[prendas_ordenadas_por_tiempo[i]] = numero_lavado
+                for j in range(i, cantidad_prendas):
+                    if prendas_ordenadas_por_tiempo[j] in resultado:
+                        continue
+                    elif not son_incompatibles(incompatibles, lista_lavado, prendas_ordenadas_por_tiempo[j]):
+                        lista_lavado.append(prendas_ordenadas_por_tiempo[j])
+                        resultado[prendas_ordenadas_por_tiempo[j]] = numero_lavado
+                lista_lavado = []
                 numero_lavado += 1
                 break
         indice += 1
@@ -64,7 +75,7 @@ with open("/Users/tomas/OneDrive/Documentos/FIUBA/Modelos/enunciado_modelos_tp2.
         if str(prenda) not in resultado:
             resultado[prenda] = numero_lavado
             numero_lavado += 1
-    
+            
     file = open("/Users/tomas/OneDrive/Documentos/FIUBA/Modelos/resultado.txt", "w")
     for prenda in resultado.keys():
         file.write(str(prenda) + " " + str(resultado[prenda]) + "\n")

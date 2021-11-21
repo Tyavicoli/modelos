@@ -65,7 +65,7 @@ with open("/Users/tomas/OneDrive/Documentos/FIUBA/Modelos/enunciado_modelos_tp1.
         if str(prenda) not in resultado:
             resultado[prenda] = numero_lavado
             numero_lavado += 1
-    
+    print(incompatibles)
     file = open("/Users/tomas/OneDrive/Documentos/FIUBA/Modelos/resultado.txt", "w")
     for prenda in resultado.keys():
         file.write(str(prenda) + " " + str(resultado[prenda]) + "\n")
