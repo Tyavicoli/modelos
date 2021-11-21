@@ -28,7 +28,6 @@ cantidad_prendas = 0
 prendas_ordenadas_por_tiempo = []
 indice = 0
 lista_lavado = []
-saltear = 0
 
 #Leo el enunciado
 with open("/Users/tomas/OneDrive/Documentos/FIUBA/Modelos/enunciado_modelos_tp2.txt","r") as archivo:
@@ -51,7 +50,7 @@ with open("/Users/tomas/OneDrive/Documentos/FIUBA/Modelos/enunciado_modelos_tp2.
                 tiempos[int(aux[2])].append(aux[1])
     
     #Ordeno prendas por cantidad de minutos, primero las que tardan mas, ultimo las que tardan menos
-    minutos.sort(reverse=True)
+    minutos.sort()
     prendas_ordenadas_por_tiempo = ordenar_lista(minutos, tiempos)
     
     
@@ -67,26 +66,21 @@ with open("/Users/tomas/OneDrive/Documentos/FIUBA/Modelos/enunciado_modelos_tp2.
                 continue
             #Me fijo si son compatibles
             if not son_incompatibles(incompatibles, [prendas_ordenadas_por_tiempo[indice]], prendas_ordenadas_por_tiempo[i]):
-                if saltear == 3:
-                    lista_lavado.append(prendas_ordenadas_por_tiempo[indice])
-                    lista_lavado.append(prendas_ordenadas_por_tiempo[i])
-                    resultado[prendas_ordenadas_por_tiempo[indice]] = numero_lavado
-                    resultado[prendas_ordenadas_por_tiempo[i]] = numero_lavado
-                    #Me fijo que otras prendas son compatibles con las 2 que encontre como comptatibles
-                    for j in range(i, cantidad_prendas):
-                        #Si la nueva prenda esta en resultado la saltea
-                        if prendas_ordenadas_por_tiempo[j] in resultado:
-                            continue
-                        elif not son_incompatibles(incompatibles, lista_lavado, prendas_ordenadas_por_tiempo[j]):
-                            lista_lavado.append(prendas_ordenadas_por_tiempo[j])
-                            resultado[prendas_ordenadas_por_tiempo[j]] = numero_lavado
-                    lista_lavado = []
-                    numero_lavado += 1
-                    saltear = 0
-                    break
-                elif saltear != 3:
-                    saltear += 1
-                    continue
+                lista_lavado.append(prendas_ordenadas_por_tiempo[indice])
+                lista_lavado.append(prendas_ordenadas_por_tiempo[i])
+                resultado[prendas_ordenadas_por_tiempo[indice]] = numero_lavado
+                resultado[prendas_ordenadas_por_tiempo[i]] = numero_lavado
+                #Me fijo que otras prendas son compatibles con las 2 que encontre como comptatibles
+                for j in range(i, cantidad_prendas):
+                    #Si la nueva prenda esta en resultado la saltea
+                    if prendas_ordenadas_por_tiempo[j] in resultado:
+                        continue
+                    elif not son_incompatibles(incompatibles, lista_lavado, prendas_ordenadas_por_tiempo[j]):
+                        lista_lavado.append(prendas_ordenadas_por_tiempo[j])
+                        resultado[prendas_ordenadas_por_tiempo[j]] = numero_lavado
+                lista_lavado = []
+                numero_lavado += 1
+                break
         indice += 1
     
     #Agrego a resultado las prendas que quedaron sueltas en lavados individuales
