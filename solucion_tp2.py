@@ -50,7 +50,7 @@ with open("/Users/tomas/OneDrive/Documentos/FIUBA/Modelos/enunciado_modelos_tp2.
                 tiempos[int(aux[2])].append(aux[1])
     
     #Ordeno prendas por cantidad de minutos, primero las que tardan mas, ultimo las que tardan menos
-    minutos.sort()
+    minutos.sort(reverse=True)
     prendas_ordenadas_por_tiempo = ordenar_lista(minutos, tiempos)
     
     
