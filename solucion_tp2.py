@@ -63,7 +63,7 @@ with open("/Users/tomas/OneDrive/Documentos/FIUBA/Modelos/enunciado_modelos_tp2.
         #Si la prenda no esta en el resultado entonces empiezo a ver cual es la proxima prenda con tiempo mas cercano que no sea incompatible
         for i in range(indice, cantidad_prendas):
             #Chequeo si la otra prenda esta en el resultado
-            if prendas_ordenadas_por_tiempo[i] in resultado:
+            if prendas_ordenadas_por_tiempo[i] in resultado or i == indice:
                 continue
             #Me fijo si son compatibles
             if not son_incompatibles(incompatibles, [prendas_ordenadas_por_tiempo[indice]], prendas_ordenadas_por_tiempo[i]):
@@ -82,6 +82,7 @@ with open("/Users/tomas/OneDrive/Documentos/FIUBA/Modelos/enunciado_modelos_tp2.
                             resultado[prendas_ordenadas_por_tiempo[j]] = numero_lavado
                     lista_lavado = []
                     numero_lavado += 1
+                    saltear = 0
                     break
                 elif saltear != 1:
                     saltear += 1
