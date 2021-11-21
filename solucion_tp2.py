@@ -67,7 +67,7 @@ with open("/Users/tomas/OneDrive/Documentos/FIUBA/Modelos/enunciado_modelos_tp2.
                 continue
             #Me fijo si son compatibles
             if not son_incompatibles(incompatibles, [prendas_ordenadas_por_tiempo[indice]], prendas_ordenadas_por_tiempo[i]):
-                if saltear == 2:
+                if saltear == 3:
                     lista_lavado.append(prendas_ordenadas_por_tiempo[indice])
                     lista_lavado.append(prendas_ordenadas_por_tiempo[i])
                     resultado[prendas_ordenadas_por_tiempo[indice]] = numero_lavado
@@ -84,7 +84,7 @@ with open("/Users/tomas/OneDrive/Documentos/FIUBA/Modelos/enunciado_modelos_tp2.
                     numero_lavado += 1
                     saltear = 0
                     break
-                elif saltear != 2:
+                elif saltear != 3:
                     saltear += 1
                     continue
         indice += 1
